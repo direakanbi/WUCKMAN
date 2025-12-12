@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@200..700&display=swap');
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'LocalGraffiti';
+  src: url('/fonts/graffiti.otf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@theme {
+  --font-heading: 'Anton', sans-serif;
+  --font-body: 'Oswald', sans-serif;
+  --color-brand-red: #D32F2F;
+  --color-brand-black: #050505;
+  --color-brand-white: #F5F5F5;
+
+  --animate-marquee: marquee 25s linear infinite;
+  --animate-marquee-reverse: marquee-reverse 25s linear infinite;
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  @keyframes marquee-reverse {
+    0% {
+      transform: translateX(-100%);
+    }
+
+    100% {
+      transform: translateX(0%);
+    }
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-brand-black text-brand-white antialiased cursor-none;
+    font-family: var(--font-body);
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+  }
+}
