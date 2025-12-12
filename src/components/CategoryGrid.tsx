@@ -11,7 +11,7 @@ const CATEGORIES = [
 const CategoryGrid = () => {
     return (
         <section className="py-0 bg-brand-black grid grid-cols-1 md:grid-cols-3 h-[50vh] md:h-[80vh]">
-            {CATEGORIES.map((cat, index) => (
+            {CATEGORIES.map((cat) => (
                 <Link to="/shop" key={cat.title} className="relative group overflow-hidden block h-full">
                     <motion.div
                         className="absolute inset-0 z-0"

@@ -1,10 +1,10 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
+import { X, Trash2, ShoppingBag } from 'lucide-react';
 import { useCartStore } from '../store/useCartStore';
 import { useNavigate } from 'react-router-dom';
 
 const CartDrawer = () => {
-    const { isOpen, closeCart, items, removeItem, updateQuantity } = useCartStore();
+    const { isOpen, closeCart, items, removeItem } = useCartStore();
     const navigate = useNavigate();
 
     const total = items.reduce((acc, item) => acc + parseFloat(item.price.replace('$', '')) * item.quantity, 0);

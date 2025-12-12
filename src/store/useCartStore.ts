@@ -17,6 +17,7 @@ interface CartStore {
     toggleCart: () => void;
     addItem: (item: Omit<CartItem, 'quantity'>) => void;
     removeItem: (id: string) => void;
+    updateQuantity: (id: string, delta: number) => void;
     clearCart: () => void;
 }
 
@@ -41,6 +42,15 @@ export const useCartStore = create<CartStore>((set) => ({
     }),
     removeItem: (id) => set((state) => ({
         items: state.items.filter(item => item.id !== id)
+    })),
+    updateQuantity: (id, delta) => set((state) => ({
+        items: state.items.map(item => {
+            if (item.id === id) {
+                const newQuantity = Math.max(1, item.quantity + delta);
+                return { ...item, quantity: newQuantity };
+            }
+            return item;
+        })
     })),
     clearCart: () => set({ items: [] })
 }));

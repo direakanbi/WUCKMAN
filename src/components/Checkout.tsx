@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCartStore } from '../store/useCartStore';
-import { motion } from 'framer-motion';
 
 const Checkout = () => {
     const navigate = useNavigate();

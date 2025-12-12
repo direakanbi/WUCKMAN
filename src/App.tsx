@@ -8,7 +8,6 @@ import ProductDetails from './components/ProductDetails';
 import { AnimatePresence } from 'framer-motion';
 import PageTransition from './components/PageTransition';
 import CustomCursor from './components/CustomCursor';
-import { useCartStore } from './store/useCartStore';
 import MenuOverlay from './components/MenuOverlay';
 import CartDrawer from './components/CartDrawer';
 import DropCountdown from './components/DropCountdown';
