@@ -10,19 +10,18 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
     const [showCounter, setShowCounter] = useState(true);
 
     useEffect(() => {
-        const duration = 2500; // Slightly longer for the logo vibe
+        // Step 1: Simulated progress up to 99%
+        const simulatedDuration = 2000;
         const interval = 20;
-        const steps = duration / interval;
-        const increment = 100 / steps;
+        const steps = simulatedDuration / interval;
+        const increment = 99 / steps;
 
         const timer = setInterval(() => {
             setCount((prev) => {
                 const newValue = prev + increment;
-                if (newValue >= 100) {
-                    clearInterval(timer);
-                    // Start the sequence: Hide counter, center logo
-                    setTimeout(() => setShowCounter(false), 200);
-                    return 100;
+                // Cap at 99% until fully loaded
+                if (newValue >= 99) {
+                    return 99;
                 }
                 return newValue;
             });
@@ -32,15 +31,28 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
             setCurrentWord(prev => (prev + 1) % words.length);
         }, 300);
 
-        // Extended delay: 2.5s load + 0.2s pause + 1.5s logo solo pulse
-        const completeTimer = setTimeout(() => {
-            onComplete();
-        }, duration + 2000);
+        // Step 2: Handle Window Load
+        const handleLoad = () => {
+            clearInterval(timer); // Stop simulation
+            setCount(100); // Jump to 100%
+
+            // Start exit sequence
+            setTimeout(() => setShowCounter(false), 200);
+            setTimeout(() => {
+                onComplete();
+            }, 1000); // Delay after 100% before opening
+        };
+
+        if (document.readyState === 'complete') {
+            handleLoad();
+        } else {
+            window.addEventListener('load', handleLoad);
+        }
 
         return () => {
             clearInterval(timer);
             clearInterval(wordTimer);
-            clearTimeout(completeTimer);
+            window.removeEventListener('load', handleLoad);
         };
     }, [onComplete]);
 
